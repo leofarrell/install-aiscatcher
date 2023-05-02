@@ -9,7 +9,8 @@ sudo apt install -y cmake
 sudo apt install -y pkg-config
 sudo apt install -y librtlsdr-dev
 sudo apt install -y whiptail
-
+sudo apt install -y libairspy-dev 
+sudo apt install -y libairspyhf-dev
 INSTALL_FOLDER=/usr/share/aiscatcher
 echo "Creating folder aiscatcher if it does not exist"
 sudo mkdir -p ${INSTALL_FOLDER}
@@ -21,16 +22,11 @@ sudo touch ${CONFIG_FILE}
 sudo chmod 777 ${CONFIG_FILE}
 echo "Writing code to config file aiscatcher.conf"
 /bin/cat <<EOM >${CONFIG_FILE}
- -d 00000162
  -v 10
- -M DT
- -gr TUNER 38.6 RTLAGC off
- -s 2304k
- -p 3
- -o 4
- -u 127.0.0.1 10110
- -N 8383
- -N PLUGIN_DIR /usr/share/aiscatcher/my-plugins
+ -N 8100
+ -N LAT -27.96 LON 153.22
+ -u 5.9.207.224 CHANGE_ME
+ -gm lna AUTO vga 12 mixer 12
 EOM
 sudo chmod 644 ${CONFIG_FILE}
 }
@@ -150,27 +146,15 @@ echo -e "\e[32m=======================\e[39m"
 
 echo -e "\e[33m(1) If on RPi you have installed AIS Dispatcher or OpenCPN,\e[39m"
 echo -e "\e[33m    it should be configured to use UDP Port 10110, IP 127.0.0.1 OR 0.0.0.0\e[39m"
-
 echo -e "\e[33m(2) Open file aiscatcher.conf by following command:\e[39m"
 echo -e "\e[39m       sudo nano "${INSTALL_FOLDER}"/aiscatcher.conf \e[39m"
 echo -e "\e[33m(3) In above file:\e[39m"
-echo -e "\e[33m    (a) Change 00000162 in \"-d 00000162\" to actual Serial Number of AIS dongle\e[39m"
-echo -e "\e[33m    (b) Change 3 in \"-p 3\" to the actual ppm correction figure of dongle\e[39m"
-echo -e "\e[33m    (c) Change 38.6 in \"-gr TUNER 38.6 RTLAGC off\" to desired Gain of dongle\e[39m"
-echo -e "\e[33m    (d) Add following line and replace xx.xxx and yy.yyy by actual values:\e[39m"
-echo -e "\e[35m          -N STATION MyStation LAT xx.xxx LON yy.yyy \e[39m"
-echo -e "\e[33m    (e) For each Site you want to feed AIS data, add a new line as follows:\e[39m"
-echo -e "\e[35m          -u [URL or IP of Site] [Port Number of Site]  \e[39m"
-echo -e "\e[33m    (f) Save (Ctrl+o) and  Close (Ctrl+x) file aiscatcher.conf \e[39m"
-echo " "
-echo -e "\e[01;31mIMPORTANT: \e[32mIf you are \e[01;31mUpgrading or Reinstalling,\e[32myour old config file & pluin folder are saved as \e[39m"
-echo -e "\e[39m       "${INSTALL_FOLDER}/aiscatcher.conf.old" \e[39m"
-echo -e "\e[39m       "${INSTALL_FOLDER}/my-plugins.old" \e[39m"
+echo -e "\e[33m    (a) Change CHANGEME in \"-u ....\" port to send to AIVDM to\e[39m"
 echo " "
 echo -e "\e[01;31m(4) REBOOT RPi ... REBOOT RPi ... REBOOT RPi \e[39m"
 echo " "
 echo -e "\e[01;32m(5) See the Web Interface (Map etc) at\e[39m"
-echo -e "\e[39m        $(ip route | grep -m1 -o -P 'src \K[0-9,.]*'):8383 \e[39m" "\e[35m(IP-of-PI:8383) \e[39m"
+echo -e "\e[39m        $(ip route | grep -m1 -o -P 'src \K[0-9,.]*'):8100 \e[39m" "\e[35m(IP-of-PI:8100) \e[39m"
 echo " "
 echo -e "\e[32m(6) Command to see Status\e[39m sudo systemctl status aiscatcher"
 echo -e "\e[32m(7) Command to Restart\e[39m    sudo systemctl restart aiscatcher"
