@@ -22,7 +22,7 @@ sudo touch ${CONFIG_FILE}
 sudo chmod 777 ${CONFIG_FILE}
 echo "Writing code to config file aiscatcher.conf"
 /bin/cat <<EOM >${CONFIG_FILE}
- -v 10
+ -v 60
  -N 8100
  -N LAT -27.96 LON 153.22
  -u 5.9.207.224 CHANGE_ME
