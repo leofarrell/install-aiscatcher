@@ -23,7 +23,7 @@ sudo chmod 777 ${CONFIG_FILE}
 echo "Writing code to config file aiscatcher.conf"
 /bin/cat <<EOM >${CONFIG_FILE}
  -v 60
- -N 8100
+ -N 8100 share_loc on
  -N LAT -27.96 LON 153.22
  -u 5.9.207.224 CHANGE_ME
  -gm lna AUTO vga 12 mixer 12
