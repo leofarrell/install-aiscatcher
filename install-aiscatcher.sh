@@ -1,16 +1,7 @@
 #!/bin/bash
 
 echo "Installing build tools and dependencies..."
-sudo apt install -y git
-sudo apt install -y make
-sudo apt install -y gcc
-sudo apt install -y g++
-sudo apt install -y cmake
-sudo apt install -y pkg-config
-sudo apt install -y librtlsdr-dev
-sudo apt install -y whiptail
-sudo apt install -y libairspy-dev 
-sudo apt install -y libairspyhf-dev
+sudo apt install -y git make gcc g++ cmake pkg-config librtlsdr-dev whiptail libairspy-dev  libairspyhf-dev
 INSTALL_FOLDER=/usr/share/aiscatcher
 echo "Creating folder aiscatcher if it does not exist"
 sudo mkdir -p ${INSTALL_FOLDER}
