@@ -121,6 +121,7 @@ sudo cp ${INSTALL_FOLDER}/AIS-catcher/plugins/* ${INSTALL_FOLDER}/my-plugins/
 
 echo "Adding udev rule for air-spy"
 sudo su -c 'echo "SUBSYSTEM==\"usb\", ATTR{idVendor}==\"1d50\", ATTR{idProduct}==\"60a1\", GROUP=\"plugdev\", MODE=\"0666\"" > /etc/udev/rules.d/98-airspy.rules'
+sudo su -c 'echo "SUBSYSTEM==\"usb\", ATTR{idVendor}==\"0bda\", ATTR{idProduct}==\"2838\", GROUP=\"plugdev\", MODE=\"0666\"" > /etc/udev/rules.d/97-rtl-sdr.rules'
 echo "Creating User aiscat to run AIS-catcher"
 sudo useradd --system aiscat
 sudo usermod -a -G adm dialout cdrom audio video plugdev games users input render netdev lpadmin gpio i2c spi aiscat
